@@ -1,0 +1,516 @@
+{
+  "name": "Ming Chen",
+  "role": "Researcher & engineer in cloud and AI systems",
+  "email": "winfred1206@gmail.com",
+  "github": "https://github.com/MingCHEN-Github",
+  "linkedin": "https://www.linkedin.com/in/ming-chen-6056b4b9/",
+  "location": "Melbourne, Australia",
+  "site_url": "https://mingchen-github.github.io",
+  "projects": [
+    {
+      "id": "idynamics",
+      "name": "iDynamics",
+      "area": "systems",
+      "tag": "Cloud & edge systems",
+      "venue": "IEEE TSC · 2026",
+      "year": "2026",
+      "status": "Early Access",
+      "title": "Making dynamic systems experiments reproducible.",
+      "summary": "A configurable emulation framework for evaluating microservice scheduling policies under controllable cloud–edge dynamics.",
+      "paper_title": "iDynamics: A Configurable Emulation Framework for Evaluating Microservice Scheduling Policies under Controllable Cloud–Edge Dynamics",
+      "authors": "Ming Chen, Muhammed Tawfiqul Islam, Maria Rodriguez Read, and Rajkumar Buyya",
+      "paper": "https://doi.org/10.1109/TSC.2026.3735871",
+      "preprint": "https://arxiv.org/abs/2503.16029",
+      "code": "https://github.com/Cloudslab/iDynamics",
+      "technologies": [
+        "Kubernetes",
+        "Python",
+        "Istio",
+        "Prometheus"
+      ],
+      "problem": "A scheduling policy can look effective under one workload and struggle when traffic, network conditions, or application behavior changes. Comparing policies requires a way to control those changes and repeat the experiment.",
+      "contribution": "I developed a configurable framework that connects workload generation, evolving service call graphs, network emulation, and policy evaluation. The implementation uses aggregate Prometheus queries and sparse graph construction, with distributed network verification and per-run evidence records.",
+      "decisions": [
+        [
+          "Make dynamics configurable",
+          "Represent workload and network changes as experimental inputs so that the same scenario can be replayed across scheduling policies."
+        ],
+        [
+          "Connect application and infrastructure views",
+          "Use service-level telemetry and call-graph information together with node-level network conditions to describe the environment a scheduler actually sees."
+        ],
+        [
+          "Evaluate the emulation itself",
+          "Measure how closely configured delay and bandwidth match observed behavior, alongside the effect of scheduling decisions."
+        ]
+      ],
+      "result": "The framework was evaluated on a research testbed with one control-plane node and 45 workers. Delay-injection validation across 72 directed pairs in a nine-worker subset reported a mean absolute error of 0.274 ms. Mean relative bandwidth-shaping error was 4.28% in the reported validation.",
+      "limitation": "Emulation offers controlled conditions for comparing policies. Its results still depend on the selected applications, hardware, workloads, and configured dynamics; evaluation in another deployment requires fresh measurements.",
+      "metric": "45",
+      "metric_label": "worker nodes in the evaluation testbed",
+      "secondary_metric": "0.274 ms",
+      "secondary_label": "mean absolute delay error"
+    },
+    {
+      "id": "trade",
+      "name": "TraDE",
+      "area": "systems",
+      "tag": "Microservice scheduling",
+      "venue": "IEEE TPDS · 2026",
+      "year": "2026",
+      "status": "Published",
+      "title": "Placing microservices with traffic and network conditions in view.",
+      "summary": "Network- and traffic-aware adaptive scheduling for microservices operating under changing conditions.",
+      "paper_title": "TraDE: Network and Traffic-Aware Adaptive Scheduling for Microservices Under Dynamics",
+      "authors": "Ming Chen, Muhammed Tawfiqul Islam, Maria Rodriguez Read, and Rajkumar Buyya",
+      "paper": "https://doi.org/10.1109/TPDS.2025.3626424",
+      "code": "https://github.com/Cloudslab/TraDE",
+      "technologies": [
+        "Kubernetes",
+        "Python",
+        "Scheduling",
+        "Telemetry"
+      ],
+      "problem": "Microservice response time depends on how much services communicate and the network paths between their hosts. Workload and network changes can make an initially reasonable placement expensive.",
+      "contribution": "I developed an adaptive scheduling approach that brings measured inter-service traffic and node-to-node network delay into placement decisions, subject to resource constraints.",
+      "decisions": [
+        [
+          "Model communication in both directions",
+          "Request and response traffic may be asymmetric. Treating both directions explicitly gives the placement objective a more useful picture of communication cost."
+        ],
+        [
+          "Adapt to observed service performance",
+          "Use response-time behavior to identify when the current placement needs reconsideration, then evaluate feasible scheduling changes."
+        ],
+        [
+          "Keep placement decisions executable",
+          "Connect the scheduling algorithm to Kubernetes deployment controls and validate its effects with application-level performance measurements."
+        ]
+      ],
+      "result": "In the evaluated DeathStarBench Social Network scenarios on a ten-node Kubernetes cluster, TraDE reports up to 48.3% lower average response time than NetMARKS under changing request patterns and controlled node delays. This is the largest improvement in the tested scenarios, rather than an expected result for every deployment.",
+      "limitation": "Moving services also has a cost. Placement benefits depend on traffic measurements, the duration of network changes, available capacity, and the operational effect of migration.",
+      "metric": "48.3%",
+      "metric_label": "maximum reduction in average response time vs. NetMARKS",
+      "preprint": "https://arxiv.org/abs/2411.05323"
+    },
+    {
+      "id": "agentfair",
+      "name": "AgentFAIR",
+      "area": "ai",
+      "tag": "Agents & data evaluation",
+      "venue": "Preprint · 2026",
+      "year": "2026",
+      "status": "Preprint",
+      "title": "Structured dataset evaluation through collaborative agents.",
+      "summary": "A multi-agent workflow for evaluating the findability, accessibility, interoperability, and reusability of geospatial datasets.",
+      "paper_title": "AgentFAIR: A Multi-Agent Collaborative Framework for FAIRness Evaluation of Geospatial Datasets",
+      "authors": "Ming Chen and Pranav Pai",
+      "paper": "https://arxiv.org/abs/2607.15781",
+      "code": "https://github.com/MingCHEN-Github/AgentFAIR",
+      "technologies": [
+        "Python",
+        "LangGraph",
+        "FastAPI",
+        "React"
+      ],
+      "problem": "FAIRness assessment involves interpreting metadata, checking evidence, and applying criteria consistently across heterogeneous geospatial datasets. Repeating that work manually is time-consuming.",
+      "contribution": "As co-first and corresponding author, I worked with a supervised student on a multi-agent approach to structured FAIRness evaluation. The implementation connects metadata extraction, 13 FAIR sub-principle evaluators, and critic feedback loops through a LangGraph workflow, with a FastAPI service and a React dashboard.",
+      "decisions": [
+        [
+          "Organize around explicit criteria",
+          "Separate the dimensions of findability, accessibility, interoperability, and reusability so that an assessment can be understood criterion by criterion."
+        ],
+        [
+          "Keep the evidence visible",
+          "Treat an assessment as a structured evaluation with supporting observations, rather than only a fluent explanation."
+        ],
+        [
+          "Make evaluation part of the workflow",
+          "Examine the behavior of the assessment process itself, including consistency and the interpretation of dataset metadata."
+        ]
+      ],
+      "result": "The public research implementation includes a multi-agent workflow and an interactive evaluation dashboard. The linked preprint presents the methodology and evaluation; the archived software record provides an additional release reference.",
+      "limitation": "An agent-generated assessment depends on available metadata, access to evidence, the chosen criteria, and model behavior. The public repository does not include every benchmark artifact needed to reproduce all manuscript results.",
+      "metric": "FAIR",
+      "metric_label": "findable · accessible · interoperable · reusable",
+      "archive": "https://zenodo.org/records/18529560",
+      "screenshot": "/assets/agentfair-dashboard.png",
+      "screenshot_caption": "An example assessment shown in the public AgentFAIR dashboard. The displayed FAIR score describes that example dataset; it is not a measure of model accuracy."
+    },
+    {
+      "id": "enbeats",
+      "name": "EN-Beats",
+      "area": "ai",
+      "tag": "Time-series learning",
+      "venue": "IEEE CLOUD · 2023",
+      "year": "2023",
+      "status": "Published",
+      "title": "Forecasting multiple cloud resources with ensemble learning.",
+      "summary": "An ensemble learning method for multiple-resource prediction in cloud computing environments.",
+      "paper_title": "EN-Beats: A Novel Ensemble Learning-Based Method for Multiple Resource Predictions in Cloud",
+      "authors": "Ming Chen, Maria Rodriguez Read, Patricia Arroba, and Rajkumar Buyya",
+      "paper": "https://doi.org/10.1109/CLOUD60044.2023.00025",
+      "technologies": [
+        "Python",
+        "Time series",
+        "Ensemble learning",
+        "Cloud resources"
+      ],
+      "problem": "Cloud resource demand changes over time, and different resource signals can exhibit different patterns. Resource management benefits from anticipating demand before making scaling or placement decisions.",
+      "contribution": "I developed an ensemble learning approach for predicting multiple cloud resource demands, connecting time-series modeling with the needs of resource management.",
+      "decisions": [
+        [
+          "Forecast across resource signals",
+          "Study multiple resource demands so that a prediction workflow can support decisions beyond a single utilization series."
+        ],
+        [
+          "Use ensemble learning",
+          "Combine predictive modeling choices to address variation in resource behavior across the evaluated datasets."
+        ],
+        [
+          "Connect prediction to system decisions",
+          "Treat forecasts as inputs to resource management, where evaluation must account for both prediction quality and the downstream use of the estimate."
+        ]
+      ],
+      "result": "The IEEE CLOUD 2023 evaluation uses Bitbrains resource traces and a ten-minute forecasting horizon. Reported CPU NRMSE is 4.4%, compared with 5.84% for N-BEATS; memory NRMSE is 5.93%, compared with 8.22%. Results vary by resource and metric.",
+      "limitation": "Forecasting quality is sensitive to the workload, prediction horizon, available history, and shifts in behavior. A deployment should validate the model against its own resource traces.",
+      "metric": "10 min",
+      "metric_label": "forecasting horizon in the evaluated resource traces",
+      "pdf": "https://clouds.cis.unimelb.edu.au/papers/CloudResourcePredictions2023.pdf"
+    }
+  ],
+  "scholar": "https://scholar.google.com.au/citations?user=KGdnd20AAAAJ&hl=en",
+  "orcid": "https://orcid.org/0000-0002-6120-6630",
+  "now": {
+    "role": "Data Scientist · Wearable R&D",
+    "organization": "CyterX Pty Ltd",
+    "dates": "October 2026–present",
+    "mode": "Part-time",
+    "summary": "Developing reproducible Python analysis and verification tools for wearable sensor algorithms, with a focus on data quality, timing, and evaluation design."
+  },
+  "research_profile": "I develop learning methods and software for systems that have to make decisions under changing conditions. My work spans cloud–edge resource management, evidence-based agent workflows, and reproducible ML engineering.",
+  "research_directions": [
+    {
+      "title": "Adaptive cloud & edge systems",
+      "question": "How should services scale and move when demand, traffic, and network conditions change together?",
+      "work": "Resource forecasting, capacity-constrained placement, telemetry, and controllable experimentation.",
+      "links": [
+        [
+          "/projects/idynamics/",
+          "iDynamics"
+        ],
+        [
+          "/projects/trade/",
+          "TraDE"
+        ],
+        [
+          "/projects/enbeats/",
+          "EN-Beats"
+        ]
+      ]
+    },
+    {
+      "title": "Evidence-based AI workflows",
+      "question": "How can an agent’s assessment remain inspectable when the source information is incomplete or heterogeneous?",
+      "work": "Structured criteria, metadata extraction, bounded critique, assessment traces, and evaluation.",
+      "links": [
+        [
+          "/projects/agentfair/",
+          "AgentFAIR"
+        ]
+      ]
+    },
+    {
+      "title": "Reliable ML engineering",
+      "question": "What needs to be controlled and checked before a model result becomes useful evidence?",
+      "work": "Pinned inputs, modular training software, numerical checks, sensor-data audits, and repeatable experiments.",
+      "links": [
+        [
+          "/engineering/reproducible-training/",
+          "Transformer training"
+        ],
+        [
+          "/experience/#wearables",
+          "Wearable R&D"
+        ]
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "wearables",
+      "role": "Data Scientist · Wearable R&D",
+      "organization": "CyterX Pty Ltd",
+      "date": "October 2026–present",
+      "type": "Part-time · Melbourne",
+      "summary": "Develop reproducible Python analysis and verification tools for wearable sensor algorithms. Work includes numerical checks, sensor-data audits, capture-timing analysis, and evaluation design for a wearable-device prototype.",
+      "detail": "I investigate data provenance, participant identity, irregular capture cadence, and repeated readings before treating a dataset as suitable for model development. The work connects algorithm analysis with explicit software checks and participant-separated evaluation design.",
+      "skills": [
+        "Python",
+        "Sensor data",
+        "Numerical verification",
+        "Evaluation design"
+      ]
+    },
+    {
+      "id": "supervision",
+      "role": "Industry Data Science Project Supervisor",
+      "organization": "The University of Melbourne",
+      "date": "March 2023–present",
+      "type": "MAST90106 / MAST90107",
+      "summary": "Supervised 10 industry-partner capstone projects involving approximately 50 postgraduate students, from problem formulation and method selection through implementation reviews, evaluation, partner demonstrations, and handover.",
+      "detail": "My role combines technical guidance with communication between student teams, academic coordinators, and external partners. The projects span document intelligence, geospatial assessment, geochemistry, educational feedback, and video analysis.",
+      "skills": [
+        "Project supervision",
+        "Applied ML",
+        "Partner communication",
+        "Technical review"
+      ]
+    },
+    {
+      "id": "phd",
+      "role": "PhD Researcher · Applied ML & Distributed Systems",
+      "organization": "The University of Melbourne · CLOUDS Laboratory",
+      "date": "March 2022–April 2026",
+      "type": "Doctoral research",
+      "summary": "Developed forecasting, scheduling, and scaling methods for microservices in dynamic computing environments. Designed algorithms, implemented research software, built Kubernetes testbeds, and evaluated the methods through controlled experiments.",
+      "detail": "The work connects EN-Beats resource forecasting, TraDE traffic-aware scheduling, and iDynamics configurable emulation. iDynamics was evaluated on a testbed with one control-plane node and 45 workers.",
+      "skills": [
+        "Kubernetes",
+        "Python",
+        "Distributed systems",
+        "Experimental design"
+      ]
+    },
+    {
+      "id": "telecom",
+      "role": "Project Manager · ML & Operational Analytics",
+      "organization": "Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences",
+      "date": "July 2018–December 2020",
+      "type": "Industry–research collaboration",
+      "summary": "Led telecommunications and smart-finance R&D teams, coordinating partner requirements, technical milestones, reporting, and research outputs. Worked on fault propagation and network-state prediction using clustering, sequential association analysis, Bayesian neural networks, and attention-based models.",
+      "detail": "Co-authored DCSA alarm-prediction and LBNN network-state research. This work combined operational-data modeling with delivery responsibilities across research colleagues and industry stakeholders.",
+      "skills": [
+        "Telecom analytics",
+        "Predictive modeling",
+        "R&D coordination",
+        "Stakeholder reporting"
+      ]
+    },
+    {
+      "id": "robotics",
+      "role": "Engineer · Cloud Robotics & Sensor Fusion",
+      "organization": "Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences",
+      "date": "August 2016–June 2018",
+      "type": "Systems & robotics engineering",
+      "summary": "Built a cloud robotics pipeline in which multiple Turtlebot robots streamed sensor data to a central server for synchronous fusion into a shared map. Deployed and debugged Linux/Docker/ROS robot-server systems.",
+      "detail": "The integration work involved real-time multi-robot SLAM map fusion, sensor-stream synchronization, routing and connectivity diagnosis, and runtime interfaces between physical devices and central computing.",
+      "skills": [
+        "Linux",
+        "Docker",
+        "ROS",
+        "SLAM",
+        "Networking"
+      ]
+    }
+  ],
+  "teaching": [
+    {
+      "role": "Teaching Associate",
+      "institution": "Monash University · School of Mathematics",
+      "date": "March 2023–present",
+      "course": "Mathematical Foundations for Data Science and AI (MAT9004)",
+      "summary": "Tutorials, workshops, consultations, assessment, and constructive feedback for undergraduate and postgraduate cohorts."
+    },
+    {
+      "role": "Academic Tutor",
+      "institution": "The University of Melbourne",
+      "date": "March–June 2025",
+      "course": "Distributed Systems (COMP90015)",
+      "summary": "Tutorials and assessment of software projects, distributed-system design, implementation, evaluation, and technical communication."
+    },
+    {
+      "role": "Lecturer & Course Administrator",
+      "institution": "Shenzhen Yuansheng Education Group",
+      "date": "November 2018–May 2019",
+      "course": "Machine learning foundations · Part-time",
+      "summary": "Taught machine-learning and deep-learning foundations and supported programming exercises."
+    }
+  ],
+  "collaboration_totals": {
+    "projects": 10,
+    "students": "~50",
+    "period": "2023–present",
+    "context": "Industry-partner Master of Data Science projects at the University of Melbourne"
+  },
+  "collaborations": [
+    {
+      "id": "aurin",
+      "partner": "AURIN",
+      "theme": "Agents & geospatial data",
+      "title": "Evidence-based FAIRness assessment",
+      "summary": "Supervised the geospatial metadata-assessment project and co-developed AgentFAIR’s research workflows.",
+      "role": "Industry project supervisor; shared research and software contribution to AgentFAIR.",
+      "work": "Guided problem formulation, evaluation, and stakeholder reporting. The research implementation combines structured metadata extraction, 13 FAIR sub-principle evaluators, bounded critic workflows, and inspectable assessment outputs.",
+      "methods": [
+        "LangGraph",
+        "LLM agents",
+        "Metadata evaluation",
+        "Evidence traces"
+      ],
+      "link": "/projects/agentfair/",
+      "link_label": "Explore AgentFAIR"
+    },
+    {
+      "id": "john-holland",
+      "partner": "John Holland Group",
+      "theme": "Document intelligence",
+      "title": "Finding useful knowledge in lessons learnt",
+      "summary": "Guided RAG and dashboard prototypes for lessons-learnt and intranet collections.",
+      "role": "Industry project supervisor: scope, method selection, implementation review, and partner communication.",
+      "work": "Helped student teams turn broad information needs into document-intelligence prototypes, evaluate retrieval and presentation choices, and prepare demonstrations, reports, and handover. Knowledge-graph integration was explored as a design direction.",
+      "methods": [
+        "Retrieval-augmented generation",
+        "Document search",
+        "Dashboarding",
+        "Evaluation"
+      ]
+    },
+    {
+      "id": "lithodat",
+      "partner": "Lithodat",
+      "theme": "Geoscience & applied ML",
+      "title": "From geochemical records to useful models",
+      "summary": "Supervised rock-classification comparisons, spatial usage dashboards, and domain-assistant concepts.",
+      "role": "Industry project supervisor: experimental design, model review, and partner-facing delivery.",
+      "work": "Guided comparisons of Random Forest, XGBoost, LightGBM, and MLP approaches for geochemical classification, together with spatial analytics and geoscience API/document assistant work.",
+      "methods": [
+        "Classification",
+        "Feature engineering",
+        "Spatial analytics",
+        "Domain retrieval"
+      ]
+    },
+    {
+      "id": "dental-school",
+      "partner": "Melbourne Dental School",
+      "theme": "Educational data science",
+      "title": "Understanding feedback on learning resources",
+      "summary": "Supervised sentiment and aspect analysis to support improvements to interactive educational materials.",
+      "role": "Industry project supervisor: method selection, interpretation, and communication of findings.",
+      "work": "Guided analysis of learner feedback, connecting text-analysis results to practical recommendations for e-learning resources.",
+      "methods": [
+        "Sentiment analysis",
+        "Aspect analysis",
+        "Text modeling"
+      ]
+    },
+    {
+      "id": "vimi",
+      "partner": "VIMI",
+      "theme": "Computer vision & media",
+      "title": "AI-assisted video captioning",
+      "summary": "Guided video-captioning and post-production prototypes with a user-facing interface.",
+      "role": "Industry project supervisor: model comparison, technical review, and prototype demonstration.",
+      "work": "Supported student work using SwinBERT and YOLOv8, with attention to comparing methods and explaining the prototype to its intended users.",
+      "methods": [
+        "SwinBERT",
+        "YOLOv8",
+        "Video captioning",
+        "Prototype interfaces"
+      ]
+    }
+  ],
+  "recognition": [
+    {
+      "year": "2025",
+      "title": "CSIRO ON Prime · Facilitator Prize",
+      "context": "QuantumVIO team",
+      "detail": "Participated in research translation and communication of application value.",
+      "url": "https://quantumvio.com/"
+    },
+    {
+      "year": "2022",
+      "title": "Best Poster · CISDC Doctoral Colloquium",
+      "context": "The University of Melbourne"
+    },
+    {
+      "year": "2022",
+      "title": "Winning Award · IBM Qiskit Hackathon",
+      "context": "Melbourne"
+    },
+    {
+      "year": "2019",
+      "title": "Annual Outstanding Engineer",
+      "context": "SIAT, Chinese Academy of Sciences"
+    },
+    {
+      "year": "2019",
+      "title": "Best Paper Award · AIMS",
+      "context": "Collaborative financial-behavior research"
+    },
+    {
+      "year": "2014",
+      "title": "National First Prize · RoboCup China",
+      "context": "Robotics competition"
+    }
+  ],
+  "additional_preprints": [
+    {
+      "id": "adascale",
+      "name": "ADASCALE",
+      "paper_title": "ADASCALE: An Adaptive Scaling and Placement Framework for Microservices Under Dynamics",
+      "authors": "Ming Chen, Muhammed Tawfiqul Islam, Maria Rodriguez Read, and Rajkumar Buyya",
+      "year": "2026",
+      "venue": "arXiv · 2026",
+      "status": "Preprint",
+      "paper": "https://arxiv.org/abs/2607.15681",
+      "arxiv": "2607.15681"
+    },
+    {
+      "id": "taxonomy",
+      "name": "Microservice management taxonomy",
+      "paper_title": "Adaptive Management of Microservices in Dynamic Computing Environments: A Taxonomy and Future Directions",
+      "authors": "Ming Chen, Muhammed Tawfiqul Islam, Maria Rodriguez Read, and Rajkumar Buyya",
+      "year": "2026",
+      "venue": "arXiv · 2026",
+      "status": "Preprint",
+      "paper": "https://arxiv.org/abs/2604.25222",
+      "arxiv": "2604.25222"
+    }
+  ],
+  "engineering_study": {
+    "title": "Reproducible Transformer training",
+    "context": "Mainrun · ML engineering assessment study",
+    "year": "2026",
+    "runs": 197,
+    "epochs": 7,
+    "summary": "A controlled training study that connects model design, optimizer behavior, configuration validation, and numerical reproducibility.",
+    "scope": "Experiments followed the assessment’s seven-epoch budget, fixed seed, dataset split, and evaluation procedure. Validation was reused during development; comparisons describe the development study.",
+    "contribution": "Implemented and evaluated a modular Transformer training pipeline, with pinned input identities, typed configuration, traceable experiment records, and numerical and protocol checks.",
+    "components": [
+      [
+        "Model",
+        "Rotary embeddings, SwiGLU layers, and per-head attention gates.",
+        "Make architecture changes explicit and comparable."
+      ],
+      [
+        "Optimization",
+        "Separate Muon/AdamW updates with checked parameter routing.",
+        "Keep the relationship between parameter groups and updates inspectable."
+      ],
+      [
+        "Experiment control",
+        "Fixed protocol, pinned input hashes, typed configuration, and recorded settings.",
+        "Connect each result to the code and inputs that produced it."
+      ],
+      [
+        "Verification",
+        "Evaluation-invariant tests, gradient checks, and CPU/CUDA comparisons.",
+        "Find implementation errors and document device-dependent numerical behavior."
+      ]
+    ],
+    "outcome": "Completed 197 seven-epoch experiments and verified reproduction of the selected CUDA model, optimizer, and scheduler states. Documented numerical differences on CPU.",
+    "boundary": "This is an engineering assessment study. The validation set was used during development, so the results are not an independent test-set estimate."
+  }
+}
